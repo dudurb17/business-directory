@@ -1,1 +1,4 @@
-const primaryColor = '#7F57F1'
+
+export const Colors ={
+  PRIMARY:'#7F57F1'
+}
