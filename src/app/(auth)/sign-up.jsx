@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TextInput, Button, View } from "react-native";
+import { TextInput, Button, View, StyleSheet, Text } from "react-native";
 import { useSignUp } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
 
@@ -57,34 +57,72 @@ export default function SignUpScreen() {
   };
 
   return (
-    <View>
-      {!pendingVerification && (
+    <View style={styles.container}>
+      {!pendingVerification ? (
         <>
+          <Text style={styles.title}>Create Your Account</Text>
           <TextInput
+            style={styles.input}
             autoCapitalize="none"
             value={emailAddress}
             placeholder="Email..."
+            placeholderTextColor="#aaa"
             onChangeText={(email) => setEmailAddress(email)}
           />
           <TextInput
+            style={styles.input}
             value={password}
             placeholder="Password..."
+            placeholderTextColor="#aaa"
             secureTextEntry={true}
             onChangeText={(password) => setPassword(password)}
           />
-          <Button title="Sign Up" onPress={onSignUpPress} />
+          <Button title="Sign Up" onPress={onSignUpPress} color="#6200ee" />
         </>
-      )}
-      {pendingVerification && (
+      ) : (
         <>
+          <Text style={styles.title}>Verify Your Email</Text>
           <TextInput
+            style={styles.input}
             value={code}
             placeholder="Code..."
+            placeholderTextColor="#aaa"
             onChangeText={(code) => setCode(code)}
           />
-          <Button title="Verify Email" onPress={onPressVerify} />
+          <Button
+            title="Verify Email"
+            onPress={onPressVerify}
+            color="#6200ee"
+          />
         </>
       )}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 16,
+    backgroundColor: "#f5f5f5",
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 24,
+    color: "#333",
+  },
+  input: {
+    width: "100%",
+    padding: 12,
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 8,
+    backgroundColor: "#fff",
+    marginBottom: 16,
+    fontSize: 16,
+    color: "#333",
+  },
+});
