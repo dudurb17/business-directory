@@ -45,11 +45,13 @@ export default function LoginScreen() {
         >
           Find yout favorite business near your own business to your Community
         </Text>
-        <TouchableOpacity style={styles.bnt}>
-          <Text style={{ color: "white", textAlign: "center" }}>
-            <Link href="/sign-in">Let's Get Started</Link>
-          </Text>
-        </TouchableOpacity>
+        <Link href="/sign-in" asChild>
+          <TouchableOpacity style={styles.bnt}>
+            <Text style={{ color: "white", textAlign: "center" }}>
+              Let's Get Started
+            </Text>
+          </TouchableOpacity>
+        </Link>
       </View>
     </View>
   );

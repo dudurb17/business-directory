@@ -45,40 +45,28 @@ export default function RootLayout() {
     },
   };
 
-  const RouterSignIn = () => {
+  const InitialLayout = ({ route, name }) => {
     const { isLoaded, isSignedIn } = useAuth();
     useEffect(() => {
-      router.replace("/home");
+      router.replace(route);
     }, [isSignedIn]);
     return (
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      </Stack>
-    );
-  };
-
-  const RouterSignOut = () => {
-    const { isLoaded, isSignedIn } = useAuth();
-    useEffect(() => {
-      router.replace("/LoginScreen");
-    }, [isSignedIn]);
-    return (
-      <Stack>
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name={name} options={{ headerShown: false }} />
       </Stack>
     );
   };
 
   return (
     <ClerkProvider
-      // tokenCache={tokenCache}
+      tokenCache={tokenCache}
       publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY}
     >
       <SignedIn>
-        <RouterSignIn />
+        <InitialLayout name="(tabs)" route="/home" />
       </SignedIn>
       <SignedOut>
-        <RouterSignOut />
+        <InitialLayout name="(auth)" route="/LoginScreen" />
       </SignedOut>
     </ClerkProvider>
   );
