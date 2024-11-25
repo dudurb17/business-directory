@@ -1,17 +1,8 @@
 import * as SecureStore from "expo-secure-store";
 import { Redirect, router, Stack } from "expo-router";
 import { useFonts } from "expo-font";
-import {
-  ClerkProvider,
-  ClerkLoaded,
-  SignedIn,
-  SignedOut,
-  useAuth,
-} from "@clerk/clerk-expo";
+import { ClerkProvider, SignedIn, SignedOut, useAuth } from "@clerk/clerk-expo";
 import React, { useEffect } from "react";
-import { Text } from "react-native";
-import LoginScreen from "./(auth)/LoginScreen";
-import { replace } from "expo-router/build/global-state/routing";
 
 export default function RootLayout() {
   useFonts({
