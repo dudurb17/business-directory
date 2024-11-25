@@ -1,17 +1,17 @@
 import * as SecureStore from "expo-secure-store";
-import { Stack } from "expo-router";
+import { Redirect, router, Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import {
   ClerkProvider,
   ClerkLoaded,
   SignedIn,
   SignedOut,
+  useAuth,
 } from "@clerk/clerk-expo";
-import React from "react";
+import React, { useEffect } from "react";
 import { Text } from "react-native";
-import LoginScreen from "../components/LoginScreen";
-import SignUpScreen from "./(auth)/sign-up.jsx";
-import Page from "./(auth)/sign-in";
+import LoginScreen from "./(auth)/LoginScreen";
+import { replace } from "expo-router/build/global-state/routing";
 
 export default function RootLayout() {
   useFonts({
@@ -44,18 +44,41 @@ export default function RootLayout() {
       }
     },
   };
+
+  const RouterSignIn = () => {
+    const { isLoaded, isSignedIn } = useAuth();
+    useEffect(() => {
+      router.replace("/home");
+    }, [isSignedIn]);
+    return (
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      </Stack>
+    );
+  };
+
+  const RouterSignOut = () => {
+    const { isLoaded, isSignedIn } = useAuth();
+    useEffect(() => {
+      router.replace("/LoginScreen");
+    }, [isSignedIn]);
+    return (
+      <Stack>
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+      </Stack>
+    );
+  };
+
   return (
     <ClerkProvider
-      tokenCache={tokenCache}
+      // tokenCache={tokenCache}
       publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY}
     >
       <SignedIn>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        </Stack>
+        <RouterSignIn />
       </SignedIn>
       <SignedOut>
-        <Page />
+        <RouterSignOut />
       </SignedOut>
     </ClerkProvider>
   );

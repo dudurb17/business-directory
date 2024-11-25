@@ -1,13 +1,15 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
-import { Colors } from "../constants/Colors";
+import { Colors } from "../../constants/Colors";
+import { Link } from "expo-router";
+import { router } from "expo-router";
 
 export default function LoginScreen() {
   return (
     <View>
       <View style={{ display: "flex", alignItems: "center", marginTop: 50 }}>
         <Image
-          source={require("./../../assets/images/login.png")}
+          source={require("../../../assets/images/login.png")}
           style={{
             width: 220,
             height: 400,
@@ -45,7 +47,7 @@ export default function LoginScreen() {
         </Text>
         <TouchableOpacity style={styles.bnt}>
           <Text style={{ color: "white", textAlign: "center" }}>
-            Let's Get Started
+            <Link href="/sign-in">Let's Get Started</Link>
           </Text>
         </TouchableOpacity>
       </View>

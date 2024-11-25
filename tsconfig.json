@@ -3,15 +3,21 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./src/*"]
     }
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-, "src/app/(tabs)/profile.jsx", "src/app/(tabs)/explore.jsx", "src/app/(tabs)/home.jsx", "src/app/(tabs)/_layout.jsx", "src/app/_layout.jsx", "src/hooks/useWarmUpBrowser.jsx", "src/app/(auth)/sign-up.jsx", "src/app/(auth)/sign-in.jsx"  ]
+    "expo-env.d.ts",
+    "src/app/(tabs)/profile.jsx",
+    "src/app/(tabs)/explore.jsx",
+    "src/app/(tabs)/home.jsx",
+    "src/app/(tabs)/_layout.jsx",
+    "src/app/_layout.jsx",
+    "src/hooks/useWarmUpBrowser.jsx",
+    "src/app/(auth)/sign-up.jsxsx",
+    "src/app/(auth)/sign-in.jsxsx"
+  ]
 }
