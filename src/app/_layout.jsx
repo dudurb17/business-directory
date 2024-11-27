@@ -42,7 +42,7 @@ export default function RootLayout() {
       router.replace(route);
     }, [isSignedIn]);
     return (
-      <Stack>
+      <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name={name} options={{ headerShown: false }} />
       </Stack>
     );
