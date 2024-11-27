@@ -23,7 +23,7 @@ export default function BusinessListByCategory() {
 
   const getBusinessList = async () => {
     setLoading(true);
-    setBusinessList([])
+    setBusinessList([]);
     const q = query(
       collection(db, "BusinessList"),
       where("category", "==", category)
@@ -32,9 +32,12 @@ export default function BusinessListByCategory() {
     const querySnapshot = await getDocs(q);
     console.log(querySnapshot);
     querySnapshot.forEach((element) =>
-      setBusinessList((prev) => [...prev, element.data()])
+      setBusinessList((prev) => [
+        ...prev,
+        { id: element.id, ...element.data() },
+      ])
     );
-
+    console.log(businessList)
     setLoading(false);
   };
   return (
@@ -49,7 +52,11 @@ export default function BusinessListByCategory() {
           )}
         />
       ) : loading ? (
-        <ActivityIndicator style={{marginTop:'60%'}} size={"large"} color={Colors.PRIMARY}/>
+        <ActivityIndicator
+          style={{ marginTop: "60%" }}
+          size={"large"}
+          color={Colors.PRIMARY}
+        />
       ) : (
         <Text
           style={{
