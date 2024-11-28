@@ -1,10 +1,12 @@
-import { View, Text, ActivityIndicator } from "react-native";
+import { View, Text, ActivityIndicator, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useLocalSearchParams } from "expo-router";
 import { doc, getDoc, query, where } from "firebase/firestore";
 import { db } from "@/configs/FirebaseConfig";
 import { Colors } from "@/constants/Colors";
 import Intro from "../../components/BusinessDetail/Intro";
+import ActionButton from "../../components/BusinessDetail/ActionButton";
+import About from "../../components/BusinessDetail/About";
 
 export default function BusinessDetail() {
   const { businessId } = useLocalSearchParams();
@@ -35,9 +37,11 @@ export default function BusinessDetail() {
           style={{ marginTop: "70%" }}
         />
       ) : (
-        <View>
+        <ScrollView>
           <Intro business={business} />
-        </View>
+          <ActionButton business={business} />
+          <About business={business} />
+        </ScrollView>
       )}
     </View>
   );
